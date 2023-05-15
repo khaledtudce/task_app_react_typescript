@@ -37,10 +37,6 @@ jobs:
         key:  ${{ secrets.KEYDEV }}
         port:  ${{ secrets.PORTDEV }}
         script: |
-          cd /home/ubuntu/deploy/
-          mkdir build
-          cp -TR . build/
-          tar -xvf build/deploy.tar -C /var/www/html/
           sudo apt-get update
           sudo apt-get install -y nginx
           sudo systemctl start nginx
