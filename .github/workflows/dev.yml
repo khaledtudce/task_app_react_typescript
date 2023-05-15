@@ -26,7 +26,7 @@ jobs:
         username:  ${{ secrets.USERDEV }}
         key:  ${{ secrets.KEYDEV }}
         port:  ${{ secrets.PORTDEV }}
-        source: build/
+        source: dist/
         target: /home/ubuntu/deploy/
 
     - name: Extract and deploy Nginx
