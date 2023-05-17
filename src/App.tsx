@@ -6,8 +6,34 @@ import { NewTaskPage } from "./pages/NewTaskPage";
 import { TaskDetailsPage as TaskDetailsPage } from "./pages/TaskDetailsPage";
 import { EditTaskPage as EditTaskPage } from "./pages/EditTaskPage";
 import { TaskDetailsLayout as TaskDetailsLayout } from "./component/TaskDetailsLayout";
+import { useMemo, useState } from "react";
+
+export type Tag = {
+  id: string;
+  label: string;
+};
+
+export type TaskData = {
+  title: string;
+  details: string;
+  tags: Tag[];
+};
+
+export type Note = {
+  id: string;
+} & TaskData;
 
 function App() {
+  // const [tasks, setTasks] = useState([]);
+  // const [tags, setTags] = useState([]);
+
+  // const notesWithTags = useMemo(() => {
+  //   return tasks.map((task)=>{
+  //     ...task,
+  //     tags: {}
+  //   });
+  // }, []);
+
   return (
     <Container className="my-4">
       <Routes>
