@@ -39,8 +39,8 @@ function App() {
   const [tasks, setTasks] = useLocalStroge<RawTask[]>("TASKS", []);
   const [tags, setTags] = useLocalStroge<Tag[]>("TAGS", []);
 
-  const tasksWithItsTags = useMemo(() => {
-    tasks.map((task) => {
+  const tasksWithConnectedTags = useMemo(() => {
+    return tasks.map((task) => {
       return {
         ...task,
         tags: getTagsOfOneTask(),
@@ -68,7 +68,12 @@ function App() {
   return (
     <Container className="my-4">
       <Routes>
-        <Route path="/" element={<TaskListPage />}></Route>
+        <Route
+          path="/"
+          element={
+            <TaskListPage availableTags={tags} tasks={tasksWithConnectedTags} />
+          }
+        ></Route>
         <Route
           path="/new"
           element={
