@@ -1,6 +1,6 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { useTask } from "../component/useTask";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 type TaskDetailsPageProps = {
@@ -9,7 +9,6 @@ type TaskDetailsPageProps = {
 
 export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
   const task = useTask();
-  const navigate = useNavigate();
   return (
     <>
       <Row className="align-items-center mb-4">
@@ -37,7 +36,6 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
               variant="danger"
               onClick={() => {
                 onDelete(task.id);
-                navigate("..");
               }}
             >
               Delete

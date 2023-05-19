@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { Container } from "react-bootstrap";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { TaskListPage } from "./pages/TaskListPage";
 import { NewTaskPage } from "./pages/NewTaskPage";
 import { TaskDetailsPage as TaskDetailsPage } from "./pages/TaskDetailsPage";
@@ -40,6 +40,7 @@ export type RawTaskData = {
 function App() {
   const [tasks, setTasks] = useLocalStroge<RawTask[]>("TASKS", []);
   const [tags, setTags] = useLocalStroge<Tag[]>("TAGS", []);
+  const navigate = useNavigate();
 
   const tasksWithConnectedTags = useMemo(() => {
     return tasks.map((task) => {
@@ -75,7 +76,15 @@ function App() {
     });
   }
 
+  function onDeleteTaskFromTaskDetails(id: string) {
+    deleteTask(id, true);
+  }
+
   function onDeleteTask(id: string) {
+    deleteTask(id, false);
+  }
+
+  function deleteTask(id: string, isFromTaskDetails: boolean) {
     confirmAlert({
       title: "Confirm Delete",
       message: "Do you really want to delete?",
@@ -87,6 +96,7 @@ function App() {
           label: "Yes",
           onClick: () => {
             setTasks(tasks.filter((task) => task.id != id));
+            if (isFromTaskDetails) navigate("..");
           },
         },
       ],
@@ -144,7 +154,7 @@ function App() {
         >
           <Route
             index
-            element={<TaskDetailsPage onDelete={onDeleteTask} />}
+            element={<TaskDetailsPage onDelete={onDeleteTaskFromTaskDetails} />}
           ></Route>
           <Route
             path="edit"
