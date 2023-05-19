@@ -102,9 +102,9 @@ export function TaskListPage({
             </Col>
           </Row>
         </Form>
-        <Row xs={1} sm={2} lg={3} xl={4} className="g-3 border">
+        <Row xs={1} sm={2} lg={3} xl={4} className="g-4 border">
           {filteredTasks.map((task) => (
-            <Col key={task.id} className="mt-3">
+            <Col key={task.id} className="mt-4">
               <TaskCard
                 id={task.id}
                 title={task.title}

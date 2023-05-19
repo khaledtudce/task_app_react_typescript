@@ -61,6 +61,18 @@ function App() {
     });
   }
 
+  function onUpdateTask(id: string, { tags, ...data }: TaskData) {
+    setTasks((prevTasks) => {
+      return prevTasks.map((task) => {
+        if (task.id === id) {
+          return { ...task, ...data, tagIds: tags.map((tag) => tag.id) };
+        } else {
+          return task;
+        }
+      });
+    });
+  }
+
   function onDeleteTask(id: string) {
     setTasks(tasks.filter((task) => task.id != id));
   }
@@ -100,7 +112,16 @@ function App() {
             index
             element={<TaskDetailsPage onDelete={onDeleteTask} />}
           ></Route>
-          <Route path="edit" element={<EditTaskPage />}></Route>
+          <Route
+            path="edit"
+            element={
+              <EditTaskPage
+                onSubmit={onUpdateTask}
+                onAddTag={onAddTag}
+                availableTags={tags}
+              />
+            }
+          ></Route>
         </Route>
       </Routes>
     </Container>
