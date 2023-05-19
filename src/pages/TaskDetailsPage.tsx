@@ -1,6 +1,6 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { useTask } from "../component/useTask";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
 type TaskDetailsPageProps = {
@@ -9,11 +9,10 @@ type TaskDetailsPageProps = {
 
 export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
   const task = useTask();
-  const navigate = useNavigate();
   return (
     <>
-      <Row className="border align-items-center mb-4">
-        <Col className="border">
+      <Row className="align-items-center mb-4">
+        <Col>
           <Stack direction="vertical">
             <h1>{task.title}</h1>
             <Stack gap={1} direction="horizontal">
@@ -25,8 +24,8 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
             </Stack>
           </Stack>
         </Col>
-        <Col xs="auto" className="border">
-          <Stack gap={2} direction="horizontal" className="p-3">
+        <Col xs="auto">
+          <Stack gap={2} direction="horizontal">
             <Link to="..">
               <Button variant="outline-secondary">Back</Button>
             </Link>
@@ -37,7 +36,6 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
               variant="danger"
               onClick={() => {
                 onDelete(task.id);
-                navigate("..");
               }}
             >
               Delete
@@ -46,7 +44,7 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
         </Col>
       </Row>
       <Row>
-        <Col className="border">
+        <Col className="mt-4 ">
           <ReactMarkdown>{task.details}</ReactMarkdown>
         </Col>
       </Row>

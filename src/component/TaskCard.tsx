@@ -18,12 +18,16 @@ export function TaskCard({ id, title, tags, onDelete }: TaskCardProps) {
           <Col
             as={Link}
             to={`/${id}`}
-            className="border text-reset text-decoration-none"
+            className="text-reset text-decoration-none col-md-10"
           >
             <Stack gap={2}>
-              <span className="fs-5">{title}</span>
+              <span className="fs-4">{title}</span>
               {tags.length > 0 && (
-                <Stack gap={1} direction="horizontal">
+                <Stack
+                  gap={1}
+                  direction="horizontal"
+                  className="overflow-hidden"
+                >
                   {tags.map((tag) => (
                     <Badge className="text-truncate" key={tag.id}>
                       {tag.label}
@@ -33,7 +37,7 @@ export function TaskCard({ id, title, tags, onDelete }: TaskCardProps) {
               )}
             </Stack>
           </Col>
-          <Col className="border" xs="auto">
+          <Col className="col-md-2">
             <Button
               className="btn-close"
               onClick={() => {

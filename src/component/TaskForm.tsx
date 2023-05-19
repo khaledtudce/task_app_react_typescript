@@ -9,12 +9,19 @@ export type TaskFormProps = {
   onSubmit: (data: TaskData) => void;
   onAddTag: (tag: Tag) => void;
   availableTags: Tag[];
-};
+} & Partial<TaskData>;
 
-export function TaskForm({ onSubmit, onAddTag, availableTags }: TaskFormProps) {
+export function TaskForm({
+  onSubmit,
+  onAddTag,
+  availableTags,
+  title = "",
+  details = "",
+  tags = [],
+}: TaskFormProps) {
   const titleRef = useRef<HTMLInputElement>(null);
   const detailsRef = useRef<HTMLTextAreaElement>(null);
-  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
   const navigate = useNavigate();
 
   function handleSubmit(e: FormEvent) {
@@ -33,7 +40,7 @@ export function TaskForm({ onSubmit, onAddTag, availableTags }: TaskFormProps) {
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
-              <Form.Control required ref={titleRef} />
+              <Form.Control required ref={titleRef} defaultValue={title} />
             </Form.Group>
           </Col>
           <Col>
@@ -66,7 +73,13 @@ export function TaskForm({ onSubmit, onAddTag, availableTags }: TaskFormProps) {
         <Col>
           <Form.Group controlId="details">
             <Form.Label>Details</Form.Label>
-            <Form.Control ref={detailsRef} required as="textarea" rows={12} />
+            <Form.Control
+              required
+              ref={detailsRef}
+              defaultValue={details}
+              as="textarea"
+              rows={12}
+            />
           </Form.Group>
         </Col>
         <Stack direction="horizontal" gap={3} className="justify-content-end">
