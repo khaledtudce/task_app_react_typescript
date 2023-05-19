@@ -61,11 +61,11 @@ export function TaskListPage({
   return (
     <>
       <Stack gap={4}>
-        <Row className="border">
+        <Row>
           <Col>
             <h1 className="mb-4">Task Lists</h1>
           </Col>
-          <Col xs="auto" className="border">
+          <Col xs="auto">
             <Stack gap={2} direction="horizontal" className="p-3">
               <Link to="/new">
                 <Button variant="primary">Create Task</Button>
@@ -80,7 +80,7 @@ export function TaskListPage({
           </Col>
         </Row>
         <Form>
-          <Row className="border">
+          <Row>
             <Col>
               <Form.Group controlId="title">
                 <Form.Label>Title</Form.Label>
@@ -113,7 +113,7 @@ export function TaskListPage({
             </Col>
           </Row>
         </Form>
-        <Row xs={1} sm={2} lg={3} xl={4} className="g-4 border">
+        <Row xs={1} sm={2} lg={3} xl={4} className="g-4">
           {filteredTasks.map((task) => (
             <Col key={task.id} className="mt-4">
               <TaskCard

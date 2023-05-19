@@ -18,7 +18,7 @@ export function TaskCard({ id, title, tags, onDelete }: TaskCardProps) {
           <Col
             as={Link}
             to={`/${id}`}
-            className="border text-reset text-decoration-none col-md-10"
+            className="text-reset text-decoration-none col-md-10"
           >
             <Stack gap={2}>
               <span className="fs-4">{title}</span>
@@ -37,7 +37,7 @@ export function TaskCard({ id, title, tags, onDelete }: TaskCardProps) {
               )}
             </Stack>
           </Col>
-          <Col className="border col-md-2">
+          <Col className="col-md-2">
             <Button
               className="btn-close"
               onClick={() => {
