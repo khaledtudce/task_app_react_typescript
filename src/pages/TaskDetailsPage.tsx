@@ -26,7 +26,7 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
           </Stack>
         </Col>
         <Col xs="auto" className="border">
-          <Stack gap={2} direction="horizontal" className="p-3">
+          <Stack gap={2} direction="horizontal" className="border">
             <Link to="..">
               <Button variant="outline-secondary">Back</Button>
             </Link>
@@ -46,7 +46,7 @@ export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
         </Col>
       </Row>
       <Row>
-        <Col className="border">
+        <Col className="border mt-4 ">
           <ReactMarkdown>{task.details}</ReactMarkdown>
         </Col>
       </Row>

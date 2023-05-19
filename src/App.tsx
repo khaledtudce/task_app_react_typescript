@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-confirm-alert/src/react-confirm-alert.css";
 import { Container } from "react-bootstrap";
 import { Route, Routes } from "react-router-dom";
 import { TaskListPage } from "./pages/TaskListPage";
@@ -9,6 +10,7 @@ import { TaskDetailsLayout as TaskDetailsLayout } from "./component/TaskDetailsL
 import { useLocalStroge } from "./hook/useLocalStroge";
 import { useMemo } from "react";
 import { v4 as uuidV4 } from "uuid";
+import { confirmAlert } from "react-confirm-alert";
 
 export type Tag = {
   id: string;
@@ -74,7 +76,21 @@ function App() {
   }
 
   function onDeleteTask(id: string) {
-    setTasks(tasks.filter((task) => task.id != id));
+    confirmAlert({
+      title: "Confirm Delete",
+      message: "Do you really want to delete?",
+      buttons: [
+        {
+          label: "No",
+        },
+        {
+          label: "Yes",
+          onClick: () => {
+            setTasks(tasks.filter((task) => task.id != id));
+          },
+        },
+      ],
+    });
   }
 
   function onAddTag(tag: Tag) {
