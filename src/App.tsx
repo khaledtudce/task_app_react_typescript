@@ -84,7 +84,10 @@ function App() {
             />
           }
         ></Route>
-        <Route path="/:id" element={<TaskDetailsLayout />}>
+        <Route
+          path="/:id"
+          element={<TaskDetailsLayout tasks={tasksWithConnectedTags} />}
+        >
           <Route index element={<TaskDetailsPage />}></Route>
           <Route path="edit" element={<EditTaskPage />}></Route>
         </Route>
