@@ -97,6 +97,22 @@ function App() {
     setTags((prev) => [...prev, tag]);
   }
 
+  function onUpdateTag(id: string, label: string) {
+    setTags((prevTags) => {
+      return prevTags.map((tag) => {
+        if (tag.id === id) {
+          return { ...tag, label: label };
+        } else {
+          return tag;
+        }
+      });
+    });
+  }
+
+  function onDeleteTag(id: string) {
+    setTags(tags.filter((tag) => tag.id != id));
+  }
+
   return (
     <Container className="my-4">
       <Routes>
@@ -106,7 +122,9 @@ function App() {
             <TaskListPage
               availableTags={tags}
               tasks={tasksWithConnectedTags}
-              onDelete={onDeleteTask}
+              onDeleteTask={onDeleteTask}
+              onUpdateTag={onUpdateTag}
+              onDeleteTag={onDeleteTag}
             />
           }
         ></Route>
