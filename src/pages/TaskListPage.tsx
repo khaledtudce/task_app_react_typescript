@@ -14,9 +14,14 @@ export type SimplifiedTask = {
 type TaskListProps = {
   availableTags: Tag[];
   tasks: SimplifiedTask[];
+  onDelete: (id: string) => void;
 };
 
-export function TaskListPage({ availableTags, tasks }: TaskListProps) {
+export function TaskListPage({
+  availableTags,
+  tasks,
+  onDelete,
+}: TaskListProps) {
   const [title, setTitle] = useState("");
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
@@ -100,7 +105,12 @@ export function TaskListPage({ availableTags, tasks }: TaskListProps) {
         <Row xs={1} sm={2} lg={3} xl={4} className="g-3 border">
           {filteredTasks.map((task) => (
             <Col key={task.id} className="mt-3">
-              <TaskCard id={task.id} title={task.title} tags={task.tags} />
+              <TaskCard
+                id={task.id}
+                title={task.title}
+                tags={task.tags}
+                onDelete={onDelete}
+              />
             </Col>
           ))}
         </Row>

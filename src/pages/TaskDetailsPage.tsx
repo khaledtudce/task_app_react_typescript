@@ -1,10 +1,15 @@
 import { Badge, Button, Col, Row, Stack } from "react-bootstrap";
 import { useTask } from "../component/useTask";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 
-export function TaskDetailsPage() {
+type TaskDetailsPageProps = {
+  onDelete: (id: string) => void;
+};
+
+export function TaskDetailsPage({ onDelete }: TaskDetailsPageProps) {
   const task = useTask();
+  const navigate = useNavigate();
   return (
     <>
       <Row className="border align-items-center mb-4">
@@ -28,7 +33,15 @@ export function TaskDetailsPage() {
             <Link to={`/${task.id}/edit`}>
               <Button variant="primary">Edit</Button>
             </Link>
-            <Button variant="danger">Delete</Button>
+            <Button
+              variant="danger"
+              onClick={() => {
+                onDelete(task.id);
+                navigate("..");
+              }}
+            >
+              Delete
+            </Button>
           </Stack>
         </Col>
       </Row>

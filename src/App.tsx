@@ -61,6 +61,10 @@ function App() {
     });
   }
 
+  function onDeleteTask(id: string) {
+    setTasks(tasks.filter((task) => task.id != id));
+  }
+
   function onAddTag(tag: Tag) {
     setTags((prev) => [...prev, tag]);
   }
@@ -71,7 +75,11 @@ function App() {
         <Route
           path="/"
           element={
-            <TaskListPage availableTags={tags} tasks={tasksWithConnectedTags} />
+            <TaskListPage
+              availableTags={tags}
+              tasks={tasksWithConnectedTags}
+              onDelete={onDeleteTask}
+            />
           }
         ></Route>
         <Route
@@ -88,7 +96,10 @@ function App() {
           path="/:id"
           element={<TaskDetailsLayout tasks={tasksWithConnectedTags} />}
         >
-          <Route index element={<TaskDetailsPage />}></Route>
+          <Route
+            index
+            element={<TaskDetailsPage onDelete={onDeleteTask} />}
+          ></Route>
           <Route path="edit" element={<EditTaskPage />}></Route>
         </Route>
       </Routes>
